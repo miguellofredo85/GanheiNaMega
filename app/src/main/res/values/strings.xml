@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GanheiNaMega</string>
+    <string name="title">Good Luck!</string>
+    <string name="digite_numero">Digite un numero de 6 a 15</string>
+</resources>
