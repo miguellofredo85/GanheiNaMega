@@ -15,39 +15,45 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editText:EditText = findViewById(R.id.txtPersonName)
-        val txtresult:TextView = findViewById(R.id.txtResult)
-        val btnGenerate:Button = findViewById(R.id.btnGenerate)
+        val editText: EditText = findViewById(R.id.txtPersonName)
+        val txtresult: TextView = findViewById(R.id.txtResult)
+        val btnGenerate: Button = findViewById(R.id.btnGenerate)
 
 //        btnGenerate.setOnClickListener(btnClickListener)
 
         btnGenerate.setOnClickListener {
 
-        val text = editText.text.toString()
+            val text = editText.text.toString()
             numberGenerator(text, txtresult)
         }
     }
-    fun numberGenerator(text:String, txtresult:TextView){
-        //validar campo vacio
-        if(text.isNotEmpty()){
-            if(text.toInt() in 6..15){
-                val random = Random()
-                val numbers = mutableSetOf<Int>()
-                while(true){
-                    var number = random.nextInt(60)
-                    numbers.add(number + 1)
-                    if(numbers.size == text.toInt()){
-                        break
-                    }
-                }
-                txtresult.text = numbers.joinToString(" - ")
 
-
-            }else{
-                Toast.makeText(this, "Text cant be empty. Range number between 6 and 15 only", Toast.LENGTH_LONG).show()
+    fun numberGenerator(text: String, txtresult: TextView) {
+        if (text.isEmpty()) {
+            Toast.makeText(
+                this,
+                "Text cant be empty. Range number between 6 and 15 only",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+        if (text.toInt() < 6 || text.toInt() > 15) {
+            Toast.makeText(
+                this,
+                "Text cant be empty. Range number between 6 and 15 only",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+        val random = Random()
+        val numbers = mutableSetOf<Int>()
+        while (true) {
+            var number = random.nextInt(60)
+            numbers.add(number + 1)
+            if (numbers.size == text.toInt()) {
+                break
             }
-        }else{
-            Toast.makeText(this, "Text cant be empty. Range number between 6 and 15 only", Toast.LENGTH_LONG).show()
+            txtresult.text = numbers.joinToString(" - ")
         }
     }
 //diferents ways to call event
