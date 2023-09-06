@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import java.util.Random
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,13 +19,38 @@ class MainActivity : AppCompatActivity() {
         val txtresult:TextView = findViewById(R.id.txtResult)
         val btnGenerate:Button = findViewById(R.id.btnGenerate)
 
-        txtresult.text = "Q te sapa???"
-
 //        btnGenerate.setOnClickListener(btnClickListener)
 
-        btnGenerate.setOnClickListener { Log.i("Test", "btn clickeado!!") }
-    }
+        btnGenerate.setOnClickListener {
 
+        val text = editText.text.toString()
+            numberGenerator(text, txtresult)
+        }
+    }
+    fun numberGenerator(text:String, txtresult:TextView){
+        //validar campo vacio
+        if(text.isNotEmpty()){
+            if(text.toInt() in 6..15){
+                val random = Random()
+                val numbers = mutableSetOf<Int>()
+                while(true){
+                    var number = random.nextInt(60)
+                    numbers.add(number + 1)
+                    if(numbers.size == text.toInt()){
+                        break
+                    }
+                }
+                txtresult.text = numbers.joinToString(" - ")
+
+
+            }else{
+                Toast.makeText(this, "Text cant be empty. Range number between 6 and 15 only", Toast.LENGTH_LONG).show()
+            }
+        }else{
+            Toast.makeText(this, "Text cant be empty. Range number between 6 and 15 only", Toast.LENGTH_LONG).show()
+        }
+    }
+//diferents ways to call event
 //    val btnClickListener = object : View.OnClickListener{
 //        override fun onClick(p0: View?) {
 //            Log.i("Test", "btn clickeado!!")
