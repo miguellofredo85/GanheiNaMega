@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 break
             }
             txtresult.text = numbers.joinToString(" - ")
-        val editor = prefs.edit()
+            val editor = prefs.edit()
             editor.putString("result", txtresult.text.toString())
             val saved = editor.apply()
             Log.i("Teste", "foi salvo $saved")
